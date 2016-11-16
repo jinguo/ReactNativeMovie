@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import {
   Image,
 } from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
 import Home from './page/Home';
 import Recommend from './page/Recommend';
 import Mine from './page/Mine';
+import TabNavigator from 'react-native-tab-navigator';
 
 export default class Main extends Component {
   constructor(props) {
