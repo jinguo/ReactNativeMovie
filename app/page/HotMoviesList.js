@@ -11,7 +11,7 @@ class HotMoviesList extends Component {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 != r2
+        rowHasChanged: (r1, r2) => r1 !== r2
       }),
       loaded: false,
     };
