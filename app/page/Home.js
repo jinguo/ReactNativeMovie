@@ -8,7 +8,7 @@ import ViewPager from 'react-native-viewpager';
 import HotMoviesList from './HotMoviesList';
 
 var deviceWidth = Dimensions.get('window').width;
-const API_THEATERS = 'https://api.douban.com/v2/movie/in_theaters';
+const API_SOON = 'https://api.douban.com/v2/movie/coming_soon';
 // var IMGS = ['https://images.unsplash.com/photo-1441742917377-57f78ee0e582?h=1024',
 //   'https://images.unsplash.com/photo-1441716844725-09cedc13a4e7?h=1024',
 //   'https://images.unsplash.com/photo-1441448770220-76743f9e6af6?h=1024',
@@ -36,7 +36,7 @@ export default class Home extends Component {
   async _fetchData() {
     try {
       // 注意这里的await语句，其所在的函数必须有async关键字声明
-      let response = await fetch(API_THEATERS);
+      let response = await fetch(API_SOON);
       let responseJson = await response.json();
       var contentData = [];
       for (let i = 0; i < 5; i++) {
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   }, pager: {
-    height: 200, width: deviceWidth,
+    height: 180, width: deviceWidth,
   }, page: {
-      height: 200,width: deviceWidth,
+      height: 180, width: deviceWidth,
   }
 });

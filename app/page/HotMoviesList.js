@@ -70,7 +70,20 @@ class HotMoviesList extends Component {
         <TouchableHighlight>
           <View style = {styles.boxRow}>
             <Image style = {styles.image} source={{uri: rowData.images.small}}></Image>
-            <Text style={[styles.title]}>{rowData.title}</Text>
+            <View style = {styles.rowRight}>
+              <View style = {{flexDirection:'row', justifyContent:'space-between'}}>
+                <Text style={[styles.title]}>{rowData.title}</Text>
+                <Text style={{color:'rgb(255,188,0)', fontSize:18}}>
+                  {rowData.rating.average}分
+                </Text>
+              </View>
+              <Text style={{marginTop:18, color:'#aaa', fontSize: 13}}>
+                类型：{rowData.genres.join(', ')}
+              </Text>
+              <Text style={{marginTop:4, color:'#aaa', fontSize: 13}}>
+                主演：{rowData.casts.map((cast)=>cast.name).join('/')}
+              </Text>
+            </View>
           </View>
         </TouchableHighlight>
     );
@@ -96,13 +109,19 @@ const styles = StyleSheet.create({
     borderBottomWidth:0.5,
     borderBottomColor:'#eee',
   },
-  boxRight: {
+  rowRight: {
     flex: 1,
-    alignItems: 'center',
+    height: 100,
+    paddingTop: 5,
+    paddingLeft: 10,
   },
   image: {
-    width: 70,
-    height: 110,
+    width: 78,
+    height: 106,
+  },
+  title: {
+    fontSize: 20,
+    color: '#000',
   }
 });
 
