@@ -1,8 +1,9 @@
 'use strict';
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text, Image, ListView, ActivityIndicator, View, TouchableHighlight,
+  StyleSheet, Text, Image, ListView, ActivityIndicator, View, TouchableOpacity,
 } from 'react-native';
+import MovieContent from '../page/MovieContent';
 
 const API_THEATERS = 'https://api.douban.com/v2/movie/in_theaters';
 
@@ -15,6 +16,7 @@ class HotMoviesList extends Component {
       }),
       loaded: false,
     };
+    this.naprop = this.props;
     this.fetchData = this.fetchData.bind(this);
   }
 
@@ -26,7 +28,6 @@ class HotMoviesList extends Component {
     let response = await fetch(API_THEATERS);
     let responseJson = await response.json();
     let responseData = responseJson.subjects;
-    console.log('responseData' + JSON.stringify(responseData));
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(responseData),
       loaded: true,
@@ -67,7 +68,9 @@ class HotMoviesList extends Component {
 
   _renderItem(rowData) {
     return (
-        <TouchableHighlight>
+        <TouchableOpacity
+            onPress={() => this._onPress(rowData)}
+        >
           <View style = {styles.boxRow}>
             <Image style = {styles.image} source={{uri: rowData.images.small}}></Image>
             <View style = {styles.rowRight}>
@@ -85,8 +88,24 @@ class HotMoviesList extends Component {
               </Text>
             </View>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
+  }
+
+  _onPress(rowData) {
+    // this.props.navigator.push({
+    //   component: MovieContent,
+    // });
+    let {navigator} = this.naprop;
+    if(navigator){
+      navigator.push({
+        name: 'info',
+        component: MovieContent,
+        params: {
+          id: rowData.id,
+        }
+      });
+    }
   }
 
 }

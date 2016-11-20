@@ -6,9 +6,11 @@ import {
   StyleSheet,
   ListView,
   ActivityIndicator,
+  TouchableOpacity,
   Image,
   Text,
 } from 'react-native';
+import MovieContent from './MovieContent';
 
 const API_TOP = 'https://api.douban.com/v2/movie/top250';
 export default class Recommend extends Component {
@@ -22,6 +24,7 @@ export default class Recommend extends Component {
       loaded: false,
       number: 1,
     };
+    this.naprop = this.props;
   }
 
   componentDidMount() {
@@ -71,6 +74,9 @@ export default class Recommend extends Component {
 
   _renderItem(rowData) {
     return (
+        <TouchableOpacity
+            onPress={() => this._onPress(rowData)}
+        >
         <View style = {styles.container}>
           <Image style = {styles.image} source={{uri: rowData.images.small}}></Image>
           <View style = {styles.rowRight}>
@@ -88,7 +94,20 @@ export default class Recommend extends Component {
             </Text>
           </View>
         </View>
+        </TouchableOpacity>
     );
+  }
+
+  _onPress(rowData) {
+    let {navigator} = this.naprop;
+    if(navigator){
+      navigator.push({
+        component: MovieContent,
+        params: {
+          id: rowData.id,
+        }
+      });
+    }
   }
 
 }

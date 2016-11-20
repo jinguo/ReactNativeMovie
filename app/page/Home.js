@@ -70,7 +70,7 @@ export default class Home extends Component {
               autoPlay={true}>
             </ViewPager>
           </View>
-          <HotMoviesList/>
+          <HotMoviesList {...this.props}/>
         </View>
     );
   }

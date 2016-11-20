@@ -17,7 +17,7 @@ export default class ReactNativeMovie extends Component {
     return (
         <Navigator
             initialRoute={{ name: 'HomePage', component: Main, index: 0}}
-            renderScene={(route,navigator) => {
+            renderScene={(route, navigator) => {
               return < route.component navigator = {navigator} {...route.params}/>;
             }}
         >

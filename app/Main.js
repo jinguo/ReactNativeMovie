@@ -29,7 +29,7 @@ export default class Main extends Component {
               //badgeText ="1"
               onPress={() => this.setState({selectedTab: 'home'})}
           >
-            < Home/>
+            < Home {...this.props}/>
           </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -41,7 +41,7 @@ export default class Main extends Component {
               renderSelectedIcon={() => <Image source={require('./images/recommend_selected.png')}/>}
               onPress={() => this.setState({selectedTab: 'recommend'})}
           >
-            < Recommend />
+            < Recommend {...this.props} />
           </TabNavigator.Item>
 
           <TabNavigator.Item
