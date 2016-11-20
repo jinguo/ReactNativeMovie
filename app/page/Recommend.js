@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   ListView,
+  ActivityIndicator,
   Image,
   Text,
 } from 'react-native';
@@ -37,7 +38,26 @@ export default class Recommend extends Component {
     });
   }
 
-  render() {
+  render () {
+    if (!this.state.loaded) {
+      return this.renderLoading();
+    } else {
+      return this.renderList();
+    }
+  }
+
+  renderLoading() {
+   return(
+       <View style = {styles.box}>
+         <ActivityIndicator
+         style = {[{margin: 10}, {backgroundColor:'#0000'}, {height: 80}]}
+         >
+         </ActivityIndicator>
+       </View>
+   );
+  }
+
+  renderList() {
     return(
         <View>
           <ListView
@@ -86,6 +106,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'row',
   },
+  box: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#F5FCFF',
+  },
   image: {
     marginTop: 10,
     marginLeft: 16,
@@ -96,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 18,
     marginTop: 10,
-    marginRight: 10,
+    marginRight: 8,
   },
   title: {
     fontSize: 20,

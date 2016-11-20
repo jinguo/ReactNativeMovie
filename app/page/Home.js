@@ -5,7 +5,7 @@ import {
   StyleSheet, Dimensions, Image, View
 } from 'react-native';
 import ViewPager from 'react-native-viewpager';
-import HotMoviesList from './HotMoviesList';
+import HotMoviesList from '../component/HotMoviesList';
 
 var deviceWidth = Dimensions.get('window').width;
 const API_SOON = 'https://api.douban.com/v2/movie/coming_soon';
