@@ -7,10 +7,12 @@ import {
   ListView,
   ActivityIndicator,
   TouchableOpacity,
+  RefreshControl,
   Image,
   Text,
 } from 'react-native';
 import MovieContent from './MovieContent';
+import Animation from '../view/Animation';
 
 const API_TOP = 'https://api.douban.com/v2/movie/top250';
 export default class Recommend extends Component {
@@ -21,8 +23,12 @@ export default class Recommend extends Component {
       dataSource: new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       }),
+      data: null,
       loaded: false,
-      number: 1,
+      isRefreshing: false,
+      loadMore: false,
+      start: 0,
+      count: 20,
     };
     this.naprop = this.props;
   }
@@ -32,12 +38,14 @@ export default class Recommend extends Component {
   }
 
   async fetchData() {
-    let response = await fetch(API_TOP);
+    let response = await fetch(API_TOP + '?count=' + this.state.count + '&start=0');
     let responseJson = await response.json();
     let responseData = responseJson.subjects;
     this.setState({
+      data: responseData,
       dataSource: this.state.dataSource.cloneWithRows(responseData),
       loaded: true,
+      isRefreshing: false,
     });
   }
 
@@ -66,9 +74,52 @@ export default class Recommend extends Component {
           <ListView
               dataSource = {this.state.dataSource}
               renderRow = {this._renderItem.bind(this)}
+              onEndReached={this._loadMore.bind(this)}
+              renderFooter={this._renderFooter.bind(this)}
+              onEndReachedThreshold = {29}
+              refreshControl={
+                <RefreshControl
+                    refreshing={this.state.isRefreshing}
+                    onRefresh={this._refresh.bind(this)}
+                    tintColor='#aaaaaa'
+                    title='Loading...'
+                    progressBackgroundColor='#aaaaaa'/>
+              }
           >
           </ListView>
         </View>
+    );
+  }
+
+  async _refresh() {
+    this.setState({isRefreshing: true});
+    this.fetchData();
+  }
+
+  async _loadMore() {
+    if (this.state.loadMore) {
+      return;
+    }
+    // this.setState({count: this.state.count +10, start: this.state.start + 10, loadMore: true});
+    // let urlMore = API_TOP + '?count=' + this.state.count + 10+ '&start=' + this.state.start +10;
+    // let responseMore = await fetch(urlMore);
+    // let responseJsonMore = await responseMore.json();
+    // console.log('api'+API_TOP + '?count=' + this.state.count + '&start=' + this.state.start+'count:'+this.state.count+'start='+this.state.start+'responseJson'+JSON.stringify(responseJsonMore));
+    // // let responseData = [...this.state.data, ...responseJson];
+    // this.setState({
+    //   // data: responseData,
+    //   dataSource: this.state.dataSource.cloneWithRows(responseJsonMore),
+    //   loadMore: false,
+    // });
+  }
+
+  _renderFooter () {
+    return (
+        this.state.loadMore
+            ? (<View style={[styles.indicatorWrapper]}>
+          <Animation timingLength = {50} duration = {500} bodyColor={'#aaaaaa'}/>
+        </View>)
+            : null
     );
   }
 
@@ -147,6 +198,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     color: '#000',
-  }
+  },
+  indicatorWrapper: {
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#252528'
+  },
 
 });

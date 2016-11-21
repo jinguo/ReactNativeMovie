@@ -112,7 +112,7 @@ export default class MovieContent extends Component {
                               <View style={{marginRight:10}}>
                                 <Image
                                     style={{width:70, height:100}}
-                                    source={  {uri: cast.avatars.medium} } />
+                                    source={{uri: cast.avatars.medium}} />
 
                                 <Text style={{color:'#888', fontSize:14, marginTop:7}}>
                                   {cast.name}

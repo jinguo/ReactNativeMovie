@@ -80,7 +80,7 @@ class HotMoviesList extends Component {
                   {rowData.rating.average}分
                 </Text>
               </View>
-              <Text style={{marginTop:18, color:'#aaa', fontSize: 13}}>
+              <Text style={{marginTop:16, color:'#aaa', fontSize: 13}}>
                 类型：{rowData.genres.join(', ')}
               </Text>
               <Text style={{marginTop:4, color:'#aaa', fontSize: 13}}>
