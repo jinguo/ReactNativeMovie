@@ -9,6 +9,8 @@ import {
   ScrollView,
 } from 'react-native';
 
+import NavigationBar from 'react-native-navbar';
+import LeftButton from '../view/LeftButton';
 const API_DETAIL = "https://api.douban.com/v2/movie/subject/";
 
 export default class MovieContent extends Component {
@@ -36,6 +38,11 @@ export default class MovieContent extends Component {
   }
 
   render() {
+    var leftButtonConfig = {
+      title: '返回',
+      handler: () => this.naprop.navigator.pop(),
+    };
+
     var dataSource = this.state.loaded?new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     }).cloneWithRows(this.state.movie.casts):null;
@@ -44,6 +51,13 @@ export default class MovieContent extends Component {
     }).cloneWithRows(new Array(5).fill(this.state.movie.images.large)):null;
     return (
         <ScrollView style={{backgroundColor:'rgb(245,245,245)', flex:1}}>
+          <NavigationBar
+              style = {{height:40}}
+              title={{title: '电影详情'}}
+              leftButton={
+                <LeftButton {...this.props}
+                />
+              }/>
           <View style={{backgroundColor:'rgb(245,245,245)', flex:1}}>
             <View style={{backgroundColor:'rgb(243,77,65)', height:240, padding:10, paddingTop:20, paddingBottom:20, flexDirection:'row'}}>
               <Image

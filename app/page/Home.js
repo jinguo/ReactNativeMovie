@@ -5,6 +5,7 @@ import {
   StyleSheet, Dimensions, Image, View
 } from 'react-native';
 import ViewPager from 'react-native-viewpager';
+import NavigationBar from 'react-native-navbar';
 import HotMoviesList from '../component/HotMoviesList';
 
 var deviceWidth = Dimensions.get('window').width;
@@ -62,12 +63,15 @@ export default class Home extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <View style = {styles.page}>
+          <NavigationBar
+              style = {{height:40}}
+              title={{title: '首页'}}/>
+          <View style={styles.page}>
             <ViewPager
-              dataSource={this.state.dataSource}
-              renderPage={this.renderPage}
-              isLoop={true}
-              autoPlay={true}>
+                dataSource={this.state.dataSource}
+                renderPage={this.renderPage}
+                isLoop={true}
+                autoPlay={true}>
             </ViewPager>
           </View>
           <HotMoviesList {...this.props}/>
@@ -82,6 +86,6 @@ const styles = StyleSheet.create({
   }, pager: {
     height: 180, width: deviceWidth,
   }, page: {
-      height: 180, width: deviceWidth,
+    height: 180, width: deviceWidth,
   }
 });

@@ -11,6 +11,7 @@ import {
   Image,
   Text,
 } from 'react-native';
+import NavigationBar from 'react-native-navbar';
 import MovieContent from './MovieContent';
 import Animation from '../view/Animation';
 
@@ -38,7 +39,7 @@ export default class Recommend extends Component {
   }
 
   async fetchData() {
-    let response = await fetch(API_TOP + '?count=' + this.state.count + '&start=0');
+    let response = await fetch(API_TOP + '?count=20&start=0');
     let responseJson = await response.json();
     let responseData = responseJson.subjects;
     this.setState({
@@ -71,6 +72,9 @@ export default class Recommend extends Component {
   renderList() {
     return(
         <View>
+          <NavigationBar
+              style = {{height:40}}
+              title={{title: '推荐'}}/>
           <ListView
               dataSource = {this.state.dataSource}
               renderRow = {this._renderItem.bind(this)}
@@ -167,7 +171,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: 20,
+    marginTop: 10,
     margin: 10,
     height: 120,
     borderColor: '#000',
