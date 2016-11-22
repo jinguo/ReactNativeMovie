@@ -59,7 +59,7 @@ export default class MovieContent extends Component {
                 />
               }/>
           <View style={{backgroundColor:'rgb(245,245,245)', flex:1}}>
-            <View style={{backgroundColor:'rgb(243,77,65)', height:240, padding:10, paddingTop:20, paddingBottom:20, flexDirection:'row'}}>
+            <View style={{backgroundColor:'#bdb76b', height:240, padding:10, paddingTop:20, paddingBottom:20, flexDirection:'row'}}>
               <Image
                   style={{width:130, height:200, borderColor:'#fff', borderWidth:1, borderRadius:3}}
                   source={ this.state.loaded ? {uri: this.state.movie.images.large} : require('../images/1.jpg') } />
