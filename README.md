@@ -5,13 +5,13 @@ ReactNativeMovie 是基于豆瓣电影 Api 的一款 React Native 项目，使�
 
 ## 界面
 
-![image](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/首页.png =400*711)
+![](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/首页.png =400*711)
 
-![image](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/推荐.png =400*711)
+![](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/推荐.png =400*711)
 
-![image](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/电影详情.png =400*711)
+![](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/电影详情.png =400*711)
 
-![image](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/我的.png =400*711)
+![](https://github.com/JangGwa/ReactNativeMovie/blob/master/pic/我的.png =400*711)
 
 ## 运行
 
